@@ -29,18 +29,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mInstaCropper = (InstaCropperView) findViewById(R.id.instacropper);
+        mInstaCropper = findViewById(R.id.instacropper);
     }
 
     public void pickPhoto(View v) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
         startActivityForResult(intent, 1);
-
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getFile()));
-//        startActivityForResult(intent, 1);
     }
 
     @Override
@@ -51,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 if (resultCode == RESULT_OK) {
                     Intent intent = InstaCropperActivity.getIntent(this, data.getData(), Uri.fromFile(new File(getExternalCacheDir(), "test.jpg")), 720, 50);
-//                    Intent intent = InstaCropperActivity.getIntent(this, Uri.fromFile(getFile()), Uri.fromFile(getFile()), 720, 50);
                     startActivityForResult(intent, 2);
                 }
                 return;
@@ -64,11 +58,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void rotate(View v) {
-//        mInstaCropper.setDrawableRotation(mInstaCropper.getDrawableRotation() + 15);
+        mInstaCropper.setRotation(mInstaCropper.getRotation() + 90);
     }
 
     public void crop(View v) {
-        mInstaCropper.crop(View.MeasureSpec.makeMeasureSpec(720, View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), new InstaCropperView.BitmapCallback() {
+        mInstaCropper.crop(
+                View.MeasureSpec.makeMeasureSpec(720, View.MeasureSpec.AT_MOST),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), new InstaCropperView.BitmapCallback() {
 
             @Override
             public void onBitmapReady(Bitmap bitmap) {
