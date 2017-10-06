@@ -34,17 +34,17 @@ Add `InstaCropperView` to your xml layout
 
 InstaCropperView receives only Uri but any Uri is possible.
 ```java
-mInstaCropper.setImageUri(imageUri);
+cropView.setImageUri(imageUri);
 ```
 
 You can specify three size ratios for the crop. The narrowest allowed, the widest allowed and the ideal ratio. The View will adjust its size by the ideal ratio.
 ```java
-mInstaCropper.setRatios(defaultRatio, minimumRatio, maximumRatio);
+cropView.setRatios(defaultRatio, minimumRatio, maximumRatio);
 ```
 
 The cropped image is returned in a callback. You can specify MeasureSpec to adjust the width and height of the returned Bitmap.
 ```java
-mInstaCropper.crop(
+cropView.crop(
         View.MeasureSpec.makeMeasureSpec(1024, View.MeasureSpec.AT_MOST),
         View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
         new InstaCropperView.BitmapCallback() {
@@ -53,7 +53,7 @@ mInstaCropper.crop(
             public void onBitmapReady(Bitmap bitmap) {
                 // Do something.
             }
-            
+
         }
 );
 ```

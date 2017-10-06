@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
@@ -11,19 +14,51 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError true
+        checkReleaseBuilds false
+        absolutePaths false
+        checkAllWarnings true
+    }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+
+    // Kotlin
+    implementation deps.kotlin
+
+    // Google Support Libraries
+    implementation deps.design
+    implementation deps.constraintLayout
+
+    implementation deps.okhttp
+
+    // Image Loading
+    implementation deps.glide
+    implementation deps.glideOkHttp
+    kapt deps.glideCompiler
+
+    // Logging
+    implementation deps.timber
+
+    implementation project(':instacropper')
+
+    // Tests
+    testImplementation deps.junit
+    testImplementation deps.mockitoForKotlin
+    testImplementation deps.kotlin
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
-    compile project(':instacropper')
+}
+
+dependencies {
 }

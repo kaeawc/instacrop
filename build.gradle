@@ -1,17 +1,19 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = "1.2.0-beta-31"
+    ext.build_tools_version = "26.0.2"
     repositories {
         jcenter()
         google()
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap-1.2" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0-beta7'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
 
@@ -19,9 +21,42 @@ allprojects {
     repositories {
         jcenter()
         google()
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap-1.2" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+String supportLibraryVersion = "26.1.0"
+String constraintLayoutVersion = "1.0.2"
+String timberVersion = "4.5.1"
+String okhttpVersion = "3.9.0"
+String glideVersion = "4.2.0"
+
+ext.deps = [
+
+        // Kotlin
+        kotlin: "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+
+        // Android
+        appCompat: "com.android.support:appcompat-v7:$supportLibraryVersion",
+        design: "com.android.support:design:$supportLibraryVersion",
+        constraintLayout: "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
+
+        // HTTP
+        okhttp: "com.squareup.okhttp3:okhttp:$okhttpVersion",
+
+        // Image Loading
+        glide: "com.github.bumptech.glide:glide:$glideVersion",
+        glideOkHttp: "com.github.bumptech.glide:okhttp3-integration:$glideVersion",
+        glideCompiler: "com.github.bumptech.glide:compiler:$glideVersion",
+
+        // Logging
+        timber: "com.jakewharton.timber:timber:$timberVersion",
+
+        // Test dependencies
+        junit: 'junit:junit:4.12',
+        mockitoForKotlin: "com.nhaarman:mockito-kotlin:1.4.0"
+]

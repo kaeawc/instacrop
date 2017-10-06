@@ -9,7 +9,7 @@
     android:background="#888">
 
     <com.yashoid.instacropper.InstaCropperView
-        android:id="@+id/instacropper"
+        android:id="@+id/crop_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/instacropper"
+        android:layout_below="@id/crop_view"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
