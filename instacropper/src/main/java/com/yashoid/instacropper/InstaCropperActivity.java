@@ -95,7 +95,7 @@ public class InstaCropperActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instacropper);
 
-        mInstaCropper = (InstaCropperView) findViewById(R.id.instacropper);
+        mInstaCropper = (InstaCropperView) findViewById(R.id.crop_view);
 
         Intent intent = getIntent();
 
